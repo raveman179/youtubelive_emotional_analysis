@@ -1,0 +1,25 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+beautifulsoup4 = "*"
+bs4 = "*"
+requests = "*"
+lxml = "*"
+retry = "*"
+pytchat = "*"
+pandas = "*"
+ginza = "*"
+matplotlib = "*"
+mlask = "*"
+pymlask = "*"
+mecab = "*"
+japanize-matplotlib = "*"
+
+[dev-packages]
+pylint = "*"
+
+[requires]
+python_version = "3.7"
