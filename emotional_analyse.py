@@ -100,17 +100,22 @@ for t in range(0, int(df_message.iat[-1,0]), 60): # 0秒からelapstime最終行
     onemin_repre.append(dict(value['representative'].value_counts()))
 
 total_orien = pd.DataFrame(onemin_orien).fillna(0)
+total_orien = total_orien.loc[:, ['POSITIVE','NEUTRAL','NEGATIVE','mostly_POSITIVE', 'mostly_NEGATIVE']]
+
 total_repre = pd.DataFrame(onemin_repre).fillna(0)
 total_repre.drop('None', axis=1, inplace=True)
-# total_orien.plot()
-# plt.title('positive/negative分類')
-# plt.xlabel('再生時間')
-# plt.ylabel('コメント個数')
-# plt.show()
-# plt.savefig('orien.png')
+total_repre = total_repre.loc[:, ['suki', 'yorokobi', 'takaburi','odoroki','ikari','haji','kowa','iya','aware','yasu', 'ikari']]
+
+# print(total_repre)
+
+total_orien.plot()
+plt.title('POSITIVE/NEGATIVE分類')
+plt.xlabel('再生時間')
+plt.ylabel('コメント個数')
+plt.savefig('orien.png')
 
 total_repre.plot()
-# plt.xlabel('再生時間')
-# plt.ylabel('コメント個数')
-# plt.savefig('reple.png')
-plt.legend()
+plt.title('感情別分類')
+plt.xlabel('再生時間')
+plt.ylabel('コメント個数')
+plt.savefig('reple.png')
