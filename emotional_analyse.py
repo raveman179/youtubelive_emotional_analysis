@@ -96,116 +96,115 @@ for t in range(0, int(df_message.iat[-1,0]), 60): # 0秒からelapstime最終行
     start = t
     end = t + 60
     value = df_message.query('{} < elapsedtime < {}'.format(start, end))
-    # onemin_orien.append(dict(value['orientation'].value_counts()))
-    onemin_orien.append((start/60,dict(value['orientation'].value_counts())))
+    onemin_orien.append(dict(value['orientation'].value_counts()))
+    # onemin_orien.append((start/60,dict(value['orientation'].value_counts())))
     onemin_repre.append(dict(value['representative'].value_counts()))
 
-# total_orien = pd.DataFrame(onemin_orien).fillna(0)
-# total_orien = total_orien.loc[:, ['POSITIVE','NEUTRAL','NEGATIVE','mostly_POSITIVE', 'mostly_NEGATIVE']]
+total_orien = pd.DataFrame(onemin_orien).fillna(0)
+total_orien = total_orien.loc[:, ['POSITIVE','NEUTRAL','NEGATIVE','mostly_POSITIVE', 'mostly_NEGATIVE']]
 
-# total_repre = pd.DataFrame(onemin_repre).fillna(0)
-# total_repre.drop('None', axis=1, inplace=True)
-# total_repre = total_repre.loc[:, ['suki', 'yorokobi', 'takaburi','odoroki','ikari','haji','kowa','iya','aware','yasu', 'ikari']]
+total_repre = pd.DataFrame(onemin_repre).fillna(0)
+total_repre.drop('None', axis=1, inplace=True)
+total_repre = total_repre.loc[:, ['suki', 'yorokobi', 'takaburi','odoroki','ikari','haji','kowa','iya','aware','yasu', 'ikari']]
 
-pprint(onemin_orien)
 
-# total_orien.plot()
-# plt.title('POSITIVE/NEGATIVE分類')
-# plt.xlabel('再生時間')
-# plt.ylabel('コメント個数')
-# plt.savefig('orien.png')
+total_orien.plot()
+plt.title('POSITIVE/NEGATIVE分類')
+plt.xlabel('再生時間')
+plt.ylabel('コメント個数')
+plt.savefig('orien.png')
 
-# total_repre.plot()
-# plt.title('感情別分類')
-# plt.xlabel('再生時間')
-# plt.ylabel('コメント個数')
-# plt.savefig('reple.png')
+total_repre.plot()
+plt.title('感情別分類')
+plt.xlabel('再生時間')
+plt.ylabel('コメント個数')
+plt.savefig('reple.png')
 
-'''
-[(0.0, {'NEGATIVE': 1, 'POSITIVE': 1}),
- (1.0, {'NEGATIVE': 1, 'POSITIVE': 1}),
- (2.0, {'POSITIVE': 3}),
- (3.0, {'POSITIVE': 5}),
- (4.0, {'NEGATIVE': 4, 'NEUTRAL': 2, 'POSITIVE': 16}),
- (5.0, {'NEGATIVE': 2, 'NEUTRAL': 1, 'POSITIVE': 15}),
- (6.0, {'NEGATIVE': 1, 'POSITIVE': 9}),
- (7.0, {'NEGATIVE': 2, 'POSITIVE': 17}),
- (8.0, {'NEGATIVE': 5, 'NEUTRAL': 1, 'POSITIVE': 7}),
- (9.0, {'NEGATIVE': 1, 'NEUTRAL': 1, 'POSITIVE': 9}),
- (10.0, {'NEGATIVE': 2, 'NEUTRAL': 1, 'POSITIVE': 22}),
- (11.0, {'NEGATIVE': 3, 'NEUTRAL': 1, 'POSITIVE': 17}),
- (12.0, {'NEGATIVE': 3, 'NEUTRAL': 7, 'POSITIVE': 39}),
- (13.0, {'NEUTRAL': 25, 'POSITIVE': 76}),
- (14.0, {'NEGATIVE': 1, 'NEUTRAL': 29, 'POSITIVE': 66}),
- (15.0, {'NEGATIVE': 1, 'NEUTRAL': 25, 'POSITIVE': 51}),
- (16.0, {'NEGATIVE': 8, 'NEUTRAL': 6, 'POSITIVE': 166}),
- (17.0, {'NEGATIVE': 9, 'NEUTRAL': 4, 'POSITIVE': 60}),
- (18.0, {'NEGATIVE': 1, 'NEUTRAL': 1, 'POSITIVE': 34, 'mostly_POSITIVE': 2}),
- (19.0, {'NEGATIVE': 4, 'NEUTRAL': 1, 'POSITIVE': 36, 'mostly_POSITIVE': 2}),
- (20.0, {'NEGATIVE': 3, 'POSITIVE': 12, 'mostly_NEGATIVE': 1}),
- (21.0, {'NEGATIVE': 8, 'NEUTRAL': 3, 'POSITIVE': 44}),
- (22.0, {'NEGATIVE': 7, 'NEUTRAL': 3, 'POSITIVE': 61, 'mostly_NEGATIVE': 1}),
- (23.0, {'NEGATIVE': 1, 'NEUTRAL': 2, 'POSITIVE': 25}),
- (24.0, {'NEGATIVE': 3, 'NEUTRAL': 1, 'POSITIVE': 36}),
- (25.0,
-  {'NEGATIVE': 7,
-   'NEUTRAL': 3,
-   'POSITIVE': 26,
-   'mostly_NEGATIVE': 1,
-   'mostly_POSITIVE': 1}),
- (26.0, {'NEUTRAL': 1, 'POSITIVE': 20}),
- (27.0, {'NEGATIVE': 6, 'POSITIVE': 9}),
- (28.0, {'NEGATIVE': 3, 'NEUTRAL': 2, 'POSITIVE': 25}),
- (29.0, {'POSITIVE': 22}),
- (30.0, {'NEGATIVE': 2, 'POSITIVE': 18}),
- (31.0, {'NEGATIVE': 10, 'NEUTRAL': 3, 'POSITIVE': 8, 'mostly_POSITIVE': 5}),
- (32.0, {'NEGATIVE': 2, 'NEUTRAL': 2, 'POSITIVE': 3}),
- (33.0,
-  {'NEGATIVE': 2, 'POSITIVE': 6, 'mostly_NEGATIVE': 1, 'mostly_POSITIVE': 1}),
- (34.0, {'NEGATIVE': 2, 'POSITIVE': 49, 'mostly_POSITIVE': 1}),
- (35.0, {'NEGATIVE': 6, 'NEUTRAL': 1, 'POSITIVE': 22}),
- (36.0, {'NEGATIVE': 3, 'POSITIVE': 37}),
- (37.0, {'NEUTRAL': 1, 'POSITIVE': 18, 'mostly_POSITIVE': 1}),
- (38.0, {'NEGATIVE': 1, 'POSITIVE': 4}),
- (39.0, {'NEGATIVE': 1, 'POSITIVE': 10}),
- (40.0, {'NEGATIVE': 5, 'POSITIVE': 8}),
- (41.0, {'NEGATIVE': 1, 'NEUTRAL': 1, 'POSITIVE': 17}),
- (42.0,
-  {'NEGATIVE': 3,
-   'NEUTRAL': 2,
-   'POSITIVE': 15,
-   'mostly_NEGATIVE': 2,
-   'mostly_POSITIVE': 2}),
- (43.0, {'NEGATIVE': 21, 'NEUTRAL': 4, 'POSITIVE': 28}),
- (44.0, {'NEGATIVE': 12, 'NEUTRAL': 1, 'POSITIVE': 12}),
- (45.0, {'NEGATIVE': 14, 'NEUTRAL': 3, 'POSITIVE': 49, 'mostly_NEGATIVE': 1}),
- (46.0, {'NEGATIVE': 4, 'NEUTRAL': 1, 'POSITIVE': 79}),
- (47.0, {'NEGATIVE': 1, 'NEUTRAL': 1, 'POSITIVE': 128}),
- (48.0, {'NEGATIVE': 2, 'POSITIVE': 39}),
- (49.0, {'NEGATIVE': 1, 'NEUTRAL': 4, 'POSITIVE': 11}),
- (50.0, {'NEGATIVE': 1, 'POSITIVE': 17}),
- (51.0, {'NEGATIVE': 1, 'POSITIVE': 7}),
- (52.0, {'NEUTRAL': 1, 'POSITIVE': 1}),
- (53.0, {'NEGATIVE': 6, 'POSITIVE': 3}),
- (54.0, {'NEGATIVE': 2, 'NEUTRAL': 1, 'POSITIVE': 1}),
- (55.0, {'NEGATIVE': 5, 'NEUTRAL': 3, 'POSITIVE': 5}),
- (56.0, {'NEGATIVE': 1, 'NEUTRAL': 2, 'POSITIVE': 6}),
- (57.0, {'NEGATIVE': 1, 'NEUTRAL': 1, 'POSITIVE': 8}),
- (58.0, {'NEGATIVE': 2, 'POSITIVE': 9}),
- (59.0, {'NEGATIVE': 3, 'POSITIVE': 98}),
- (60.0, {'NEGATIVE': 1, 'POSITIVE': 38}),
- (61.0, {'POSITIVE': 11}),
- (62.0, {'NEGATIVE': 1, 'NEUTRAL': 1, 'POSITIVE': 34}),
- (63.0, {'NEGATIVE': 2, 'NEUTRAL': 1, 'POSITIVE': 28}),
- (64.0, {'NEGATIVE': 4, 'NEUTRAL': 4, 'POSITIVE': 13}),
- (65.0, {'POSITIVE': 17}),
- (66.0, {'NEGATIVE': 1, 'POSITIVE': 9}),
- (67.0, {'NEGATIVE': 4, 'NEUTRAL': 2, 'POSITIVE': 9}),
- (68.0, {'NEGATIVE': 3, 'NEUTRAL': 3, 'POSITIVE': 19}),
- (69.0, {'NEGATIVE': 2, 'POSITIVE': 9}),
- (70.0, {'NEGATIVE': 1, 'NEUTRAL': 1, 'POSITIVE': 20}),
- (71.0, {'NEUTRAL': 2, 'POSITIVE': 23}),
- (72.0, {'NEUTRAL': 4, 'POSITIVE': 8}),
- (73.0, {'NEUTRAL': 2, 'POSITIVE': 5}),
- (74.0, {'POSITIVE': 5})]
-'''
+# '''
+# [(0.0, {'NEGATIVE': 1, 'POSITIVE': 1}),
+#  (1.0, {'NEGATIVE': 1, 'POSITIVE': 1}),
+#  (2.0, {'POSITIVE': 3}),
+#  (3.0, {'POSITIVE': 5}),
+#  (4.0, {'NEGATIVE': 4, 'NEUTRAL': 2, 'POSITIVE': 16}),
+#  (5.0, {'NEGATIVE': 2, 'NEUTRAL': 1, 'POSITIVE': 15}),
+#  (6.0, {'NEGATIVE': 1, 'POSITIVE': 9}),
+#  (7.0, {'NEGATIVE': 2, 'POSITIVE': 17}),
+#  (8.0, {'NEGATIVE': 5, 'NEUTRAL': 1, 'POSITIVE': 7}),
+#  (9.0, {'NEGATIVE': 1, 'NEUTRAL': 1, 'POSITIVE': 9}),
+#  (10.0, {'NEGATIVE': 2, 'NEUTRAL': 1, 'POSITIVE': 22}),
+#  (11.0, {'NEGATIVE': 3, 'NEUTRAL': 1, 'POSITIVE': 17}),
+#  (12.0, {'NEGATIVE': 3, 'NEUTRAL': 7, 'POSITIVE': 39}),
+#  (13.0, {'NEUTRAL': 25, 'POSITIVE': 76}),
+#  (14.0, {'NEGATIVE': 1, 'NEUTRAL': 29, 'POSITIVE': 66}),
+#  (15.0, {'NEGATIVE': 1, 'NEUTRAL': 25, 'POSITIVE': 51}),
+#  (16.0, {'NEGATIVE': 8, 'NEUTRAL': 6, 'POSITIVE': 166}),
+#  (17.0, {'NEGATIVE': 9, 'NEUTRAL': 4, 'POSITIVE': 60}),
+#  (18.0, {'NEGATIVE': 1, 'NEUTRAL': 1, 'POSITIVE': 34, 'mostly_POSITIVE': 2}),
+#  (19.0, {'NEGATIVE': 4, 'NEUTRAL': 1, 'POSITIVE': 36, 'mostly_POSITIVE': 2}),
+#  (20.0, {'NEGATIVE': 3, 'POSITIVE': 12, 'mostly_NEGATIVE': 1}),
+#  (21.0, {'NEGATIVE': 8, 'NEUTRAL': 3, 'POSITIVE': 44}),
+#  (22.0, {'NEGATIVE': 7, 'NEUTRAL': 3, 'POSITIVE': 61, 'mostly_NEGATIVE': 1}),
+#  (23.0, {'NEGATIVE': 1, 'NEUTRAL': 2, 'POSITIVE': 25}),
+#  (24.0, {'NEGATIVE': 3, 'NEUTRAL': 1, 'POSITIVE': 36}),
+#  (25.0,
+#   {'NEGATIVE': 7,
+#    'NEUTRAL': 3,
+#    'POSITIVE': 26,
+#    'mostly_NEGATIVE': 1,
+#    'mostly_POSITIVE': 1}),
+#  (26.0, {'NEUTRAL': 1, 'POSITIVE': 20}),
+#  (27.0, {'NEGATIVE': 6, 'POSITIVE': 9}),
+#  (28.0, {'NEGATIVE': 3, 'NEUTRAL': 2, 'POSITIVE': 25}),
+#  (29.0, {'POSITIVE': 22}),
+#  (30.0, {'NEGATIVE': 2, 'POSITIVE': 18}),
+#  (31.0, {'NEGATIVE': 10, 'NEUTRAL': 3, 'POSITIVE': 8, 'mostly_POSITIVE': 5}),
+#  (32.0, {'NEGATIVE': 2, 'NEUTRAL': 2, 'POSITIVE': 3}),
+#  (33.0,
+#   {'NEGATIVE': 2, 'POSITIVE': 6, 'mostly_NEGATIVE': 1, 'mostly_POSITIVE': 1}),
+#  (34.0, {'NEGATIVE': 2, 'POSITIVE': 49, 'mostly_POSITIVE': 1}),
+#  (35.0, {'NEGATIVE': 6, 'NEUTRAL': 1, 'POSITIVE': 22}),
+#  (36.0, {'NEGATIVE': 3, 'POSITIVE': 37}),
+#  (37.0, {'NEUTRAL': 1, 'POSITIVE': 18, 'mostly_POSITIVE': 1}),
+#  (38.0, {'NEGATIVE': 1, 'POSITIVE': 4}),
+#  (39.0, {'NEGATIVE': 1, 'POSITIVE': 10}),
+#  (40.0, {'NEGATIVE': 5, 'POSITIVE': 8}),
+#  (41.0, {'NEGATIVE': 1, 'NEUTRAL': 1, 'POSITIVE': 17}),
+#  (42.0,
+#   {'NEGATIVE': 3,
+#    'NEUTRAL': 2,
+#    'POSITIVE': 15,
+#    'mostly_NEGATIVE': 2,
+#    'mostly_POSITIVE': 2}),
+#  (43.0, {'NEGATIVE': 21, 'NEUTRAL': 4, 'POSITIVE': 28}),
+#  (44.0, {'NEGATIVE': 12, 'NEUTRAL': 1, 'POSITIVE': 12}),
+#  (45.0, {'NEGATIVE': 14, 'NEUTRAL': 3, 'POSITIVE': 49, 'mostly_NEGATIVE': 1}),
+#  (46.0, {'NEGATIVE': 4, 'NEUTRAL': 1, 'POSITIVE': 79}),
+#  (47.0, {'NEGATIVE': 1, 'NEUTRAL': 1, 'POSITIVE': 128}),
+#  (48.0, {'NEGATIVE': 2, 'POSITIVE': 39}),
+#  (49.0, {'NEGATIVE': 1, 'NEUTRAL': 4, 'POSITIVE': 11}),
+#  (50.0, {'NEGATIVE': 1, 'POSITIVE': 17}),
+#  (51.0, {'NEGATIVE': 1, 'POSITIVE': 7}),
+#  (52.0, {'NEUTRAL': 1, 'POSITIVE': 1}),
+#  (53.0, {'NEGATIVE': 6, 'POSITIVE': 3}),
+#  (54.0, {'NEGATIVE': 2, 'NEUTRAL': 1, 'POSITIVE': 1}),
+#  (55.0, {'NEGATIVE': 5, 'NEUTRAL': 3, 'POSITIVE': 5}),
+#  (56.0, {'NEGATIVE': 1, 'NEUTRAL': 2, 'POSITIVE': 6}),
+#  (57.0, {'NEGATIVE': 1, 'NEUTRAL': 1, 'POSITIVE': 8}),
+#  (58.0, {'NEGATIVE': 2, 'POSITIVE': 9}),
+#  (59.0, {'NEGATIVE': 3, 'POSITIVE': 98}),
+#  (60.0, {'NEGATIVE': 1, 'POSITIVE': 38}),
+#  (61.0, {'POSITIVE': 11}),
+#  (62.0, {'NEGATIVE': 1, 'NEUTRAL': 1, 'POSITIVE': 34}),
+#  (63.0, {'NEGATIVE': 2, 'NEUTRAL': 1, 'POSITIVE': 28}),
+#  (64.0, {'NEGATIVE': 4, 'NEUTRAL': 4, 'POSITIVE': 13}),
+#  (65.0, {'POSITIVE': 17}),
+#  (66.0, {'NEGATIVE': 1, 'POSITIVE': 9}),
+#  (67.0, {'NEGATIVE': 4, 'NEUTRAL': 2, 'POSITIVE': 9}),
+#  (68.0, {'NEGATIVE': 3, 'NEUTRAL': 3, 'POSITIVE': 19}),
+#  (69.0, {'NEGATIVE': 2, 'POSITIVE': 9}),
+#  (70.0, {'NEGATIVE': 1, 'NEUTRAL': 1, 'POSITIVE': 20}),
+#  (71.0, {'NEUTRAL': 2, 'POSITIVE': 23}),
+#  (72.0, {'NEUTRAL': 4, 'POSITIVE': 8}),
+#  (73.0, {'NEUTRAL': 2, 'POSITIVE': 5}),
+#  (74.0, {'POSITIVE': 5})]
+# '''
