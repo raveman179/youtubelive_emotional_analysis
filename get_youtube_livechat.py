@@ -1,8 +1,14 @@
 import pytchat
 import time
 # PytchatCoreオブジェクトの取得
-livechat = pytchat.create(video_id = "zCK_490ryjg")# video_idはhttps://....watch?v=より後ろの
-filepath = "./comment_zCK_490ryjg.txt"
+video_id = "I1wqOXlXHp8"
+'''
+"zCK_490ryjg"　キズナアイから大事なお知らせがあります
+"9u_I1k65MYE"　【空気読み。】読めるんです！ほんとです！ぺこ！【ホロライブ/兎田ぺこら】
+"I1wqOXlXHp8"　公園の地下に巨大神殿があるらしいので行ってみた【にじさんじ/月ノ美兎】
+'''
+livechat = pytchat.create(video_id)# video_idはhttps://....watch?v=より後ろの
+filepath = "./comment_{}.txt".format(video_id)
 
 with open(filepath, mode='a') as f:
     while livechat.is_alive():
