@@ -1,7 +1,7 @@
 import pytchat
 import time
 # PytchatCoreオブジェクトの取得
-video_id = "I1wqOXlXHp8"
+video_id = "zCK_490ryjg"
 '''
 "zCK_490ryjg"　キズナアイから大事なお知らせがあります
 "9u_I1k65MYE"　【空気読み。】読めるんです！ほんとです！ぺこ！【ホロライブ/兎田ぺこら】
@@ -15,7 +15,7 @@ with open(filepath, mode='a') as f:
         # チャットデータの取得
         chatdata = livechat.get()
         for c in chatdata.items:
-            f.write(f"{c.datetime},{c.author.name},{c.message}\n")
+            f.write(f"{c.datetime}|,|{c.author.name}|,|{c.message}\n")
             '''
             JSON文字列で取得:
             # print(c.json())

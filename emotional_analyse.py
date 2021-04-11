@@ -9,19 +9,23 @@ import re
 from pprint import pprint
 
 pd.set_option('display.max_rows', None)
-# filepath = "/home/masaraveman/Documents/lang_learning/python/emotest/comment_zCK_490ryjg.txt"
-ch_id = "I1wqOXlXHp8"
+ch_id = "zCK_490ryjg"
+# ch_id = "I1wqOXlXHp8"
 filepath = f"/home/masaraveman/Documents/lang_learning/python/emotest/comment_{ch_id}.txt"
 
 
 with open(filepath, mode="r", encoding="UTF-8", errors="", newline="") as f:
-    lst = csv.reader(f, delimiter=",")
+    lst = csv.reader(f, delimiter="|")
+    df = pd.DataFrame(lst, columns=['datetime', 'author_name', 'message'])
     # df = pd.DataFrame(lst, columns=['datetime', 'author_name', 'm1', 'm2', 'm3', 'm4'])
-    df = pd.DataFrame(lst, columns=['datetime', 'author_name', 'm1', 'm2'])
+    # df = pd.DataFrame(lst, columns=['datetime', 'author_name', 'm1', 'm2'])
 
+df["message"] = df["message"].fillna("")
 # df["message"] = df["m1"]+df["m2"].fillna("")+df["m3"].fillna("")+df["m4"].fillna("")
-df["message"] = df["m1"]+df["m2"].fillna("")
-df.drop(['m1', 'm2'], axis=1, inplace=True)
+df.drop(['m1', 'm2', 'm3', 'm4'], axis=1, inplace=True)
+
+# df["message"] = df["m1"]+df["m2"].fillna("")
+# df.drop(['m1', 'm2'], axis=1, inplace=True)
 
 playtime = df["datetime"].values.tolist()
 elapsed = []
@@ -126,8 +130,8 @@ for pos, neu, neg, most_pos, most_neg in zip(total_orien['POSITIVE'], total_orie
     point = (most_pos * 10 + pos) - (most_neg * 10 + neg) 
     emolist.append(point)
 
-emotional_point = pd.Series(emolist)
-print(emotional_point)
+
+
 # total_orien.plot()
 # plt.title('POSITIVE/NEGATIVE分類')
 # plt.xlabel('再生時間')
@@ -140,8 +144,10 @@ print(emotional_point)
 # plt.ylabel('コメント個数(個)')
 # plt.savefig(f'reple{ch_id}.png')
 
-# emotional_point.plot()
-# plt.title('POSITIVE/NEGATIVE評価')
-# plt.xlabel('再生時間(min)')
-# plt.ylabel('感情ポイント(point)')
-# plt.savefig(f'orien_{ch_id}.png')
+emotional_point = pd.Series(emolist)
+
+emotional_point.plot()
+plt.title('POSITIVE/NEGATIVE評価')
+plt.xlabel('再生時間(min)')
+plt.ylabel('感情ポイント(point)')
+plt.savefig(f'orien_{ch_id}.png')
